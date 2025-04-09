@@ -1,4 +1,4 @@
-# uts_fatih_mpl
+# FBOX - Music Platform
 
 A new Flutter project.
 
