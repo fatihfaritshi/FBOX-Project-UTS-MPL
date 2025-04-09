@@ -53,8 +53,9 @@ dev_dependencies:
 flutter:
   assets:
     - assets/pop.png
+    - assets/fatih.png
 
-uses-material-design: true
+  uses-material-design: true
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -67,10 +68,18 @@ uses-material-design: true
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+  - family: Orbitron
+    fonts:
+    - asset: assets/fonts/Orbitron-Bold.ttf
+    - asset: assets/fonts/Orbitron-Regular.ttf
+      weight: 700
+  - family: Montserrat
+    fonts:
+      - asset: assets/fonts/Montserrat-Regular.ttf
+      - asset: assets/fonts/Montserrat-Bold.ttf
+        weight: 700
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

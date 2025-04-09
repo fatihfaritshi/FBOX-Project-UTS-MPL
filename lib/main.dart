@@ -15,28 +15,29 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SoundVibe 🎧',
       theme: ThemeData(
+        fontFamily: 'Montserrat',
         primaryColor: const Color.fromARGB(255, 5, 13, 67),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromARGB(255, 5, 13, 67),
           titleTextStyle: TextStyle(
+            fontFamily: 'Montserrat',
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ), // buat icon person juga putih
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontFamily: 'Montserrat'),
         ),
       ),
-      home: const HomePage(), // Diarahkan ke widget HomePage baru
+      home: const HomePage(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  final List<String> genres = const ['Pop', 'Rock', 'Hip-Hop', 'K-Pop', 'Jazz'];
 
   @override
   Widget build(BuildContext context) {
@@ -47,43 +48,87 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed:
-                () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const UserProfilePage()),
-                ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const UserProfilePage()),
+              );
+            },
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: 180,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/pop.png'),
-                fit: BoxFit.cover,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 5, 13, 67),
+              Color.fromARGB(255, 41, 50, 139),
+              Color.fromARGB(255, 80, 123, 243),
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: 180,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset('assets/pop.png', fit: BoxFit.cover),
+                  Container(color: Colors.black.withOpacity(0.5)),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'FBOX',
+                          style: TextStyle(
+                            fontFamily: 'Orbitron',
+                            fontSize: 42,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            letterSpacing: 2,
+                            shadows: [
+                              Shadow(
+                                color: Color.fromARGB(216, 255, 255, 255),
+                                offset: Offset(1, 1),
+                                blurRadius: 4,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Music Platform',
+                          style: TextStyle(
+                            fontFamily: 'Orbitron',
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            child: const Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Text(
-                  'Temukan Lagu Favoritmu!',
-                  style: TextStyle(fontSize: 22, color: Colors.white),
-                ),
+            const SizedBox(height: 40),
+            const Text(
+              'Genre Populer:',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          const Text('Genre Populer:', style: TextStyle(fontSize: 18)),
-          const SizedBox(height: 10),
-          Expanded(
-            child: _GenreGrid(), // Memisahkan logika grid agar rapi
-          ),
-        ],
+            const SizedBox(height: 30),
+            const Expanded(child: _GenreGrid()),
+          ],
+        ),
       ),
     );
   }
@@ -94,62 +139,95 @@ class _GenreGrid extends StatelessWidget {
 
   final List<String> genres = const ['Pop', 'Rock', 'Hip-Hop', 'K-Pop', 'Jazz'];
 
-  final Map<String, String> genreImages = const {
-    'Pop': 'assets/pop.png',
-    'Hip-Hop': 'assets/pop.png',
-    'K-Pop': 'assets/pop.png',
-    'Jazz': 'assets/pop.png',
-    'Rock': 'assets/pop.png',
+  final Map<String, Map<String, dynamic>> genreStyles = const {
+    'Pop': {
+      'icon': Icons.music_note,
+      'textColor': Color(0xFF062F75),
+      'iconColor': Color(0xFF062F75),
+    },
+    'Rock': {
+      'icon': Icons.surround_sound,
+      'textColor': Color(0xFF89100E),
+      'iconColor': Color(0xFF89100E),
+    },
+    'Hip-Hop': {
+      'icon': Icons.headset_mic,
+      'textColor': Color(0xFFA2870D),
+      'iconColor': Color(0xFFA2870D),
+    },
+    'K-Pop': {
+      'icon': Icons.favorite,
+      'textColor': Color(0xFF550863),
+      'iconColor': Color(0xFF550863),
+    },
+    'Jazz': {
+      'icon': Icons.audiotrack,
+      'textColor': Color(0xFF08660D),
+      'iconColor': Color(0xFF08660D),
+    },
   };
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: const EdgeInsets.all(12),
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 16),
       itemCount: genres.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        childAspectRatio: 2.5,
-      ),
       itemBuilder: (context, index) {
         final genre = genres[index];
-        final imagePath = genreImages[genre] ?? 'assets/default.jpg';
+        final style = genreStyles[genre]!;
 
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => SongListPage(genre: genre)),
-            );
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: const Color.fromARGB(255, 5, 13, 67),
-            ),
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Opacity(
-                  opacity: 0.50,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(imagePath, fit: BoxFit.cover),
+        return Container(
+          margin: const EdgeInsets.symmetric(vertical: 15),
+          height: 120,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(
+              0.60,
+            ), // background putih transparan
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.50),
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(25),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => SongListPage(genre: genre)),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                children: [
+                  Icon(
+                    style['icon'],
+                    size: 36,
+                    color: style['iconColor'], // warna icon berdasarkan genre
                   ),
-                ),
-                Center(
-                  child: Text(
+                  const SizedBox(width: 16),
+                  Text(
                     genre,
-                    style: const TextStyle(
-                      fontSize: 22,
+                    style: TextStyle(
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontFamily: 'Montserrat',
+                      color: style['textColor'], // warna teks berdasarkan genre
+                      shadows: const [
+                        Shadow(
+                          color: Colors.black26,
+                          offset: Offset(1, 1),
+                          blurRadius: 2,
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

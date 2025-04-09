@@ -60,7 +60,9 @@ class _SongDetailPageState extends State<SongDetailPage>
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromARGB(255, 5, 13, 67), Color.fromARGB(255, 7, 17, 129)],
+            colors: [Color.fromARGB(255, 5, 13, 67),
+              Color.fromARGB(255, 41, 50, 139),
+              Color.fromARGB(255, 80, 123, 243)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -88,7 +90,7 @@ class _SongDetailPageState extends State<SongDetailPage>
             ElevatedButton.icon(
               onPressed: togglePlay,
               icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-              label: Text(isPlaying ? 'Pause (Simulasi)' : 'Play (Simulasi)'),
+              label: Text(isPlaying ? 'Pause ' : 'Play'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: Color.fromARGB(255, 5, 13, 67),
