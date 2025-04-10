@@ -34,9 +34,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const HomePage(),
-      routes: {
-    '/settings': (context) => const SettingsPage(),
-  },
+      routes: {'/settings': (context) => const SettingsPage()},
     );
   }
 }
@@ -59,41 +57,46 @@ class _HomePageState extends State<HomePage> {
       'title': 'Shape of You',
       'artist': 'Ed Sheeran',
       'genre': 'Pop',
-      'image': 'assets/shape_of_you.jpg'
+      'image': 'assets/shape_of_you.jpg',
     },
     {
       'title': 'Thank You',
       'artist': 'GOT7',
       'genre': 'K-Pop',
-      'image': 'assets/thankyou.jpg'
+      'image': 'assets/thankyou.jpg',
     },
     {
       'title': 'her',
       'artist': 'GOT7',
       'genre': 'K-Pop',
-      'image': 'assets/got7.jpeg'
+      'image': 'assets/got7.jpeg',
     },
     {
       'title': 'Love Wins All',
       'artist': 'IU',
       'genre': 'K-Pop',
-      'image': 'assets/iu.png'
+      'image': 'assets/iu.png',
     },
     {
       'title': 'Star',
       'artist': 'Colde',
       'genre': 'K-Pop',
-      'image': 'assets/star.jpg'
+      'image': 'assets/star.jpg',
     },
   ];
 
   void _filterSongs(String query) {
     setState(() {
-      filteredSongs = songs
-          .where((song) =>
-              song['title']!.toLowerCase().contains(query.toLowerCase()) ||
-              song['artist']!.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      filteredSongs =
+          songs
+              .where(
+                (song) =>
+                    song['title']!.toLowerCase().contains(
+                      query.toLowerCase(),
+                    ) ||
+                    song['artist']!.toLowerCase().contains(query.toLowerCase()),
+              )
+              .toList();
     });
   }
 
@@ -118,21 +121,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SoundVibe 🎧'),
-        backgroundColor: const Color.fromARGB(255, 4, 11, 56),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const SettingsPage()),
-              );
-            },
-          ),
-        ],
-      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -155,6 +143,40 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Image.asset('assets/banner.jpg', fit: BoxFit.cover),
                   Container(color: Colors.black.withOpacity(0.5)),
+
+                  // Background transparan belakang icon settings
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.20),
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(100),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Tombol settings
+                  Positioned(
+                    top: 7,
+                    right: 7,
+                    child: IconButton(
+                      icon: const Icon(Icons.settings, color: Colors.white),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SettingsPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -192,6 +214,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+
             const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 65),
@@ -259,27 +282,28 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedIndex,
         onTap: _onBottomNavTapped,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Favorite',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );
   }
 }
+
 class _GenreGrid extends StatelessWidget {
   const _GenreGrid({super.key});
 
-  static const List<String> genres = ['Pop', 'Rock', 'Hip-Hop', 'K-Pop', 'Jazz'];
+  static const List<String> genres = [
+    'Pop',
+    'Rock',
+    'Hip-Hop',
+    'K-Pop',
+    'Jazz',
+  ];
   static const Map<String, Map<String, dynamic>> genreStyles = {
     'Pop': {
       'icon': Icons.music_note,
@@ -348,16 +372,12 @@ class _GenreGrid extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 children: [
-                  Icon(
-                    style['icon'],
-                    size: 38,
-                    color: style['iconColor'],
-                  ),
+                  Icon(style['icon'], size: 35, color: style['iconColor']),
                   const SizedBox(width: 16),
                   Text(
                     genre,
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Montserrat',
                       color: style['textColor'],
