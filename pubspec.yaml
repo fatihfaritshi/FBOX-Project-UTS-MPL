@@ -54,6 +54,17 @@ flutter:
   assets:
     - assets/pop.png
     - assets/fatih.png
+    - assets/got7.jpeg
+    - assets/iu.png
+    - assets/ed.png
+    - assets/star.jpg
+    - assets/thankyou.jpg
+    - assets/toxic.jpg
+    - assets/staylonger.jpeg
+    - assets/ditto.jpg
+    - assets/eta.jpg
+    - assets/woojooin.png
+    - assets/banner.jpg
 
   uses-material-design: true
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'song_list.dart';
 import 'user_profile.dart';
+import 'favorite_page.dart';
+import 'settings_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,12 +34,86 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const HomePage(),
+      routes: {
+    '/settings': (context) => const SettingsPage(),
+  },
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final TextEditingController _searchController = TextEditingController();
+  List<Map<String, String>> filteredSongs = [];
+
+  int _selectedIndex = 0;
+
+  final List<Map<String, String>> songs = const [
+    {
+      'title': 'Shape of You',
+      'artist': 'Ed Sheeran',
+      'genre': 'Pop',
+      'image': 'assets/shape_of_you.jpg'
+    },
+    {
+      'title': 'Thank You',
+      'artist': 'GOT7',
+      'genre': 'K-Pop',
+      'image': 'assets/thankyou.jpg'
+    },
+    {
+      'title': 'her',
+      'artist': 'GOT7',
+      'genre': 'K-Pop',
+      'image': 'assets/got7.jpeg'
+    },
+    {
+      'title': 'Love Wins All',
+      'artist': 'IU',
+      'genre': 'K-Pop',
+      'image': 'assets/iu.png'
+    },
+    {
+      'title': 'Star',
+      'artist': 'Colde',
+      'genre': 'K-Pop',
+      'image': 'assets/star.jpg'
+    },
+  ];
+
+  void _filterSongs(String query) {
+    setState(() {
+      filteredSongs = songs
+          .where((song) =>
+              song['title']!.toLowerCase().contains(query.toLowerCase()) ||
+              song['artist']!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+
+  void _onBottomNavTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const FavoritePage()),
+      );
+    } else if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const UserProfilePage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +123,11 @@ class HomePage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 4, 11, 56),
         actions: [
           IconButton(
-            icon: const Icon(Icons.person),
+            icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const UserProfilePage()),
+                MaterialPageRoute(builder: (_) => const SettingsPage()),
               );
             },
           ),
@@ -64,7 +140,7 @@ class HomePage extends StatelessWidget {
             end: Alignment.bottomCenter,
             colors: [
               Color.fromARGB(255, 5, 13, 67),
-              Color.fromARGB(255, 41, 50, 139),
+              Color.fromARGB(255, 7, 18, 90),
               Color.fromARGB(255, 80, 123, 243),
             ],
           ),
@@ -77,7 +153,7 @@ class HomePage extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset('assets/pop.png', fit: BoxFit.cover),
+                  Image.asset('assets/banner.jpg', fit: BoxFit.cover),
                   Container(color: Colors.black.withOpacity(0.5)),
                   Center(
                     child: Column(
@@ -117,6 +193,26 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 65),
+              child: TextField(
+                controller: _searchController,
+                onChanged: _filterSongs,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: 'Cari lagu atau penyanyi...',
+                  hintStyle: const TextStyle(color: Colors.white54),
+                  filled: true,
+                  fillColor: Colors.white24,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  prefixIcon: const Icon(Icons.search, color: Colors.white),
+                ),
+              ),
+            ),
+            const SizedBox(height: 25),
             const Text(
               'Genre Populer:',
               style: TextStyle(
@@ -125,21 +221,66 @@ class HomePage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 30),
-            const Expanded(child: _GenreGrid()),
+            const SizedBox(height: 15),
+            if (_searchController.text.isNotEmpty)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: filteredSongs.length,
+                  itemBuilder: (context, index) {
+                    final song = filteredSongs[index];
+                    return ListTile(
+                      leading: Image.asset(
+                        song['image']!,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                      title: Text(
+                        song['title']!,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      subtitle: Text(
+                        song['artist']!,
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                    );
+                  },
+                ),
+              )
+            else
+              const Expanded(child: _GenreGrid()),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color.fromARGB(255, 4, 11, 56),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(171, 255, 255, 255),
+        currentIndex: _selectedIndex,
+        onTap: _onBottomNavTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorite',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }
 }
-
 class _GenreGrid extends StatelessWidget {
   const _GenreGrid({super.key});
 
-  final List<String> genres = const ['Pop', 'Rock', 'Hip-Hop', 'K-Pop', 'Jazz'];
-
-  final Map<String, Map<String, dynamic>> genreStyles = const {
+  static const List<String> genres = ['Pop', 'Rock', 'Hip-Hop', 'K-Pop', 'Jazz'];
+  static const Map<String, Map<String, dynamic>> genreStyles = {
     'Pop': {
       'icon': Icons.music_note,
       'textColor': Color(0xFF062F75),
@@ -170,7 +311,7 @@ class _GenreGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 16),
       itemCount: genres.length,
       itemBuilder: (context, index) {
         final genre = genres[index];
@@ -178,22 +319,25 @@ class _GenreGrid extends StatelessWidget {
 
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 15),
-          height: 120,
+          height: 90,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(
-              0.60,
-            ), // background putih transparan
-            borderRadius: BorderRadius.circular(30),
+            color: Colors.white.withOpacity(0.85),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(40),
+              bottomLeft: Radius.circular(40),
+              bottomRight: Radius.circular(10),
+            ),
             boxShadow: [
               BoxShadow(
-                color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.50),
-                blurRadius: 2,
-                offset: const Offset(0, 1),
+                color: Colors.black.withOpacity(0.25),
+                blurRadius: 6,
+                offset: const Offset(2, 4),
               ),
             ],
           ),
           child: InkWell(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(30),
             onTap: () {
               Navigator.push(
                 context,
@@ -206,8 +350,8 @@ class _GenreGrid extends StatelessWidget {
                 children: [
                   Icon(
                     style['icon'],
-                    size: 36,
-                    color: style['iconColor'], // warna icon berdasarkan genre
+                    size: 38,
+                    color: style['iconColor'],
                   ),
                   const SizedBox(width: 16),
                   Text(
@@ -216,7 +360,7 @@ class _GenreGrid extends StatelessWidget {
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Montserrat',
-                      color: style['textColor'], // warna teks berdasarkan genre
+                      color: style['textColor'],
                       shadows: const [
                         Shadow(
                           color: Colors.black26,
