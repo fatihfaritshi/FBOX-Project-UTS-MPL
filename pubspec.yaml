@@ -65,6 +65,18 @@ flutter:
     - assets/eta.jpg
     - assets/woojooin.png
     - assets/banner.jpg
+    - assets/oceans.jpg
+    - assets/london.png
+    - assets/q1.png
+    - assets/blue.jpeg
+    - assets/fineline.jpeg
+    - assets/liedto.jpeg
+    - assets/ifgot.jpeg
+    - assets/wild.png
+    - assets/window.png
+    - assets/lm5.jpeg
+    - assets/always.png
+    - assets/twilight.png
 
   uses-material-design: true
 

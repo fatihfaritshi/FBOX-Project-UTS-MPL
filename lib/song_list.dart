@@ -8,66 +8,131 @@ class SongListPage extends StatelessWidget {
 
   final List<Map<String, String>> songs = const [
     {
-      'title': 'Shape of You',
-      'artist': 'Ed Sheeran',
-      'genre': 'Pop',
-      'image': 'assets/ed.png'
+      "title": "/ forever more /",
+      "artist": "Gamaliel",
+      "genre": "Pop",
+      "image": "assets/q1.png",
     },
     {
-      'title': 'Thank You',
-      'artist': 'GOT7',
-      'genre': 'K-Pop',
-      'image': 'assets/thankyou.jpg'
+      "title": "Always",
+      "artist": "Daniel Ceasar",
+      "genre": "Pop",
+      "image": "assets/always.png",
     },
     {
-      'title': 'her',
-      'artist': 'GOT7',
-      'genre': 'K-Pop',
-      'image': 'assets/got7.jpeg'
+      "title": "Blue",
+      "artist": "Jackson Wang",
+      "genre": "Pop",
+      "image": "assets/blue.jpeg",
     },
     {
-      'title': 'Love Wins All',
-      'artist': 'IU',
-      'genre': 'K-Pop',
-      'image': 'assets/iu.png'
+      "title": "Ditto",
+      "artist": "NewJeans",
+      "genre": "K-Pop",
+      "image": "assets/ditto.jpg",
     },
     {
-      'title': 'Star',
-      'artist': 'Colde',
-      'genre': 'K-Pop',
-      'image': 'assets/star.jpg'
+      "title": "ETA",
+      "artist": "NewJeans",
+      "genre": "K-Pop",
+      "image": "assets/eta.jpg",
     },
     {
-      'title': 'TOXIC',
-      'artist': 'MEOVV',
-      'genre': 'K-Pop',
-      'image': 'assets/toxic.jpg'
+      "title": "Fine Line",
+      "artist": "Harry Styles",
+      "genre": "Pop",
+      "image": "assets/fineline.jpeg",
     },
     {
-      'title': 'stay a little longer',
-      'artist': 'ROSÉ',
-      'genre': 'K-Pop',
-      'image': 'assets/staylonger.jpeg'
+      "title": "If I Got You",
+      "artist": "ZAYN",
+      "genre": "Pop",
+      "image": "assets/ifgot.jpeg",
     },
     {
-      'title': 'Ditto',
-      'artist': 'NewJeans',
-      'genre': 'K-Pop',
-      'image': 'assets/ditto.jpg'
+      "title": "her",
+      "artist": "GOT7",
+      "genre": "K-Pop",
+      "image": "assets/got7.jpeg",
     },
     {
-      'title': 'ETA',
-      'artist': 'NewJeans',
-      'genre': 'K-Pop',
-      'image': 'assets/eta.jpg'
+      "title": "Lied To",
+      "artist": "ZAYN",
+      "genre": "Pop",
+      "image": "assets/liedto.jpeg",
     },
     {
-      'title': 'Woojooin',
-      'artist': 'Soe Young Joo (OST Melo Movie)',
-      'genre': 'K-Pop',
-      'image': 'assets/woojooin.png'
+      "title": "Little Window",
+      "artist": "FINNEAS",
+      "genre": "Pop",
+      "image": "assets/window.png",
     },
-    // Tambahkan lagu lain di sini kalau perlu
+    {
+      "title": "Love Wins All",
+      "artist": "IU",
+      "genre": "K-Pop",
+      "image": "assets/iu.png",
+    },
+    {
+      "title": "Monster in Me",
+      "artist": "Little Mix",
+      "genre": "Pop",
+      "image": "assets/lm5.jpeg",
+    },
+    {
+      "title": "Oceans & Engines",
+      "artist": "NIKI",
+      "genre": "Pop",
+      "image": "assets/oceans.jpg",
+    },
+    {
+      "title": "Shape of You",
+      "artist": "Ed Sheeran",
+      "genre": "Pop",
+      "image": "assets/ed.png",
+    },
+    {
+      "title": "So Long, London",
+      "artist": "Taylor Swift",
+      "genre": "Pop",
+      "image": "assets/london.png",
+    },
+    {
+      "title": "Star",
+      "artist": "Colde",
+      "genre": "K-Pop",
+      "image": "assets/star.jpg",
+    },
+    {
+      "title": "stay a little longer",
+      "artist": "ROSÉ",
+      "genre": "K-Pop",
+      "image": "assets/staylonger.jpeg",
+    },
+    {
+      "title": "Thank You",
+      "artist": "GOT7",
+      "genre": "K-Pop",
+      "image": "assets/thankyou.jpg",
+    },
+    {
+      "title": "TOXIC",
+      "artist": "MEOVV",
+      "genre": "K-Pop",
+      "image": "assets/toxic.jpg",
+    },
+    {
+      "title": "WILDFLOWER",
+      "artist": "Billie Eilish",
+      "genre": "Pop",
+      "image": "assets/wild.png",
+    },
+    {
+      "title": "Woojooin",
+      "artist": "Soe Young Joo (OST Melo Movie)",
+      "genre": "K-Pop",
+      "image": "assets/woojooin.png",
+    },
   ];
 
   @override
@@ -98,7 +163,10 @@ class SongListPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final song = filteredSongs[index];
           return ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(5), // Sudut lengkung
               child: Image.asset(

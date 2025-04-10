@@ -7,7 +7,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pengaturan'),
+        title: const Text('Settings'),
         backgroundColor: const Color.fromARGB(255, 5, 13, 67),
       ),
       body: ListView(

@@ -79,7 +79,7 @@ class _SongDetailPageState extends State<SongDetailPage>
             colors: [
               Color.fromARGB(255, 5, 13, 67),
               Color.fromARGB(255, 41, 50, 139),
-              Color.fromARGB(255, 80, 123, 243)
+              Color.fromARGB(255, 80, 123, 243),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -129,7 +129,9 @@ class _SongDetailPageState extends State<SongDetailPage>
                   backgroundColor: Colors.white,
                   foregroundColor: const Color.fromARGB(255, 5, 13, 67),
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 24, vertical: 12),
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                 ),
               ),
             ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'user_profile.dart';
-import 'main.dart'; // Untuk kembali ke HomePage
+import 'main.dart'; 
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
@@ -9,7 +9,7 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorit Saya'),
+        title: const Text('My Favorite'),
         backgroundColor: const Color.fromARGB(255, 5, 13, 67),
         actions: [
           IconButton(

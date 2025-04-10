@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/animation.dart';
 import 'song_list.dart';
 import 'user_profile.dart';
 import 'favorite_page.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SoundVibe 🎧',
+      title: 'FBOX 🎧',
       theme: ThemeData(
         fontFamily: 'Montserrat',
         primaryColor: const Color.fromARGB(255, 5, 13, 67),
@@ -54,34 +55,130 @@ class _HomePageState extends State<HomePage> {
 
   final List<Map<String, String>> songs = const [
     {
-      'title': 'Shape of You',
-      'artist': 'Ed Sheeran',
-      'genre': 'Pop',
-      'image': 'assets/shape_of_you.jpg',
+      "title": "/ forever more /",
+      "artist": "Gamaliel",
+      "genre": "Pop",
+      "image": "assets/q1.png",
     },
     {
-      'title': 'Thank You',
-      'artist': 'GOT7',
-      'genre': 'K-Pop',
-      'image': 'assets/thankyou.jpg',
+      "title": "Always",
+      "artist": "Daniel Ceasar",
+      "genre": "Pop",
+      "image": "assets/always.png",
     },
     {
-      'title': 'her',
-      'artist': 'GOT7',
-      'genre': 'K-Pop',
-      'image': 'assets/got7.jpeg',
+      "title": "Blue",
+      "artist": "Jackson Wang",
+      "genre": "Pop",
+      "image": "assets/blue.jpeg",
     },
     {
-      'title': 'Love Wins All',
-      'artist': 'IU',
-      'genre': 'K-Pop',
-      'image': 'assets/iu.png',
+      "title": "Ditto",
+      "artist": "NewJeans",
+      "genre": "K-Pop",
+      "image": "assets/ditto.jpg",
     },
     {
-      'title': 'Star',
-      'artist': 'Colde',
-      'genre': 'K-Pop',
-      'image': 'assets/star.jpg',
+      "title": "ETA",
+      "artist": "NewJeans",
+      "genre": "K-Pop",
+      "image": "assets/eta.jpg",
+    },
+    {
+      "title": "Fine Line",
+      "artist": "Harry Styles",
+      "genre": "Pop",
+      "image": "assets/fineline.jpeg",
+    },
+    {
+      "title": "If I Got You",
+      "artist": "ZAYN",
+      "genre": "Pop",
+      "image": "assets/ifgot.jpeg",
+    },
+    {
+      "title": "her",
+      "artist": "GOT7",
+      "genre": "K-Pop",
+      "image": "assets/got7.jpeg",
+    },
+    {
+      "title": "Lied To",
+      "artist": "ZAYN",
+      "genre": "Pop",
+      "image": "assets/liedto.jpeg",
+    },
+    {
+      "title": "Little Window",
+      "artist": "FINNEAS",
+      "genre": "Pop",
+      "image": "assets/window.png",
+    },
+    {
+      "title": "Love Wins All",
+      "artist": "IU",
+      "genre": "K-Pop",
+      "image": "assets/iu.png",
+    },
+    {
+      "title": "Monster in Me",
+      "artist": "Little Mix",
+      "genre": "Pop",
+      "image": "assets/lm5.jpeg",
+    },
+    {
+      "title": "Oceans & Engines",
+      "artist": "NIKI",
+      "genre": "Pop",
+      "image": "assets/oceans.jpg",
+    },
+    {
+      "title": "Shape of You",
+      "artist": "Ed Sheeran",
+      "genre": "Pop",
+      "image": "assets/ed.png",
+    },
+    {
+      "title": "So Long, London",
+      "artist": "Taylor Swift",
+      "genre": "Pop",
+      "image": "assets/london.png",
+    },
+    {
+      "title": "Star",
+      "artist": "Colde",
+      "genre": "K-Pop",
+      "image": "assets/star.jpg",
+    },
+    {
+      "title": "stay a little longer",
+      "artist": "ROSÉ",
+      "genre": "K-Pop",
+      "image": "assets/staylonger.jpeg",
+    },
+    {
+      "title": "Thank You",
+      "artist": "GOT7",
+      "genre": "K-Pop",
+      "image": "assets/thankyou.jpg",
+    },
+    {
+      "title": "TOXIC",
+      "artist": "MEOVV",
+      "genre": "K-Pop",
+      "image": "assets/toxic.jpg",
+    },
+    {
+      "title": "WILDFLOWER",
+      "artist": "Billie Eilish",
+      "genre": "Pop",
+      "image": "assets/wild.png",
+    },
+    {
+      "title": "Woojooin",
+      "artist": "Soe Young Joo (OST Melo Movie)",
+      "genre": "K-Pop",
+      "image": "assets/woojooin.png",
     },
   ];
 
@@ -142,7 +239,29 @@ class _HomePageState extends State<HomePage> {
                 fit: StackFit.expand,
                 children: [
                   Image.asset('assets/banner.jpg', fit: BoxFit.cover),
+
+                  // Overlay hitam semi-transparan seluruh banner
                   Container(color: Colors.black.withOpacity(0.5)),
+
+                  // Efek gradasi pudar di bawah banner
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: 50,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromARGB(34, 6, 15, 75),
+                            Color.fromARGB(255, 5, 13, 67), // Atau samakan dengan background kamu
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
 
                   // Background transparan belakang icon settings
                   Positioned(
@@ -152,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.20),
+                        color: Colors.white,
                         borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(100),
                         ),
@@ -162,10 +281,10 @@ class _HomePageState extends State<HomePage> {
 
                   // Tombol settings
                   Positioned(
-                    top: 7,
-                    right: 7,
+                    top: 5,
+                    right: 5,
                     child: IconButton(
-                      icon: const Icon(Icons.settings, color: Colors.white),
+                      icon: const Icon(Icons.settings, color: Color.fromARGB(255, 7, 18, 90)),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -177,6 +296,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
+                  // Teks di tengah banner
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -185,15 +305,15 @@ class _HomePageState extends State<HomePage> {
                           'FBOX',
                           style: TextStyle(
                             fontFamily: 'Orbitron',
-                            fontSize: 42,
+                            fontSize: 50,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             letterSpacing: 2,
                             shadows: [
                               Shadow(
                                 color: Color.fromARGB(216, 255, 255, 255),
-                                offset: Offset(1, 1),
-                                blurRadius: 4,
+                                offset: Offset(2, 3),
+                                blurRadius: 5,
                               ),
                             ],
                           ),
@@ -215,15 +335,25 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 28),
+            const Text(
+              'From chill to thrill—play what you feel',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+
+            const SizedBox(height: 25),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 65),
+              padding: const EdgeInsets.symmetric(horizontal: 70),
               child: TextField(
                 controller: _searchController,
                 onChanged: _filterSongs,
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  hintText: 'Cari lagu atau penyanyi...',
+                  hintText: 'Search for a song or artist...',
                   hintStyle: const TextStyle(color: Colors.white54),
                   filled: true,
                   fillColor: Colors.white24,
@@ -235,14 +365,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+
             const SizedBox(height: 25),
             const Text(
               'Genre Populer:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              style: TextStyle(fontSize: 15, color: Colors.white),
             ),
             const SizedBox(height: 15),
             if (_searchController.text.isNotEmpty)
@@ -294,9 +421,14 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class _GenreGrid extends StatelessWidget {
+class _GenreGrid extends StatefulWidget {
   const _GenreGrid({super.key});
 
+  @override
+  State<_GenreGrid> createState() => _GenreGridState();
+}
+
+class _GenreGridState extends State<_GenreGrid> {
   static const List<String> genres = [
     'Pop',
     'Rock',
@@ -304,6 +436,7 @@ class _GenreGrid extends StatelessWidget {
     'K-Pop',
     'Jazz',
   ];
+
   static const Map<String, Map<String, dynamic>> genreStyles = {
     'Pop': {
       'icon': Icons.music_note,
@@ -332,26 +465,27 @@ class _GenreGrid extends StatelessWidget {
     },
   };
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 16),
-      itemCount: genres.length,
-      itemBuilder: (context, index) {
-        final genre = genres[index];
-        final style = genreStyles[genre]!;
+  final Map<String, bool> _isHovered = {};
 
-        return Container(
-          margin: const EdgeInsets.symmetric(vertical: 15),
-          height: 90,
+  Widget _buildGenreBox(BuildContext context, String genre) {
+    final style = genreStyles[genre]!;
+
+    _isHovered.putIfAbsent(genre, () => false);
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered[genre] = true),
+      onExit: (_) => setState(() => _isHovered[genre] = false),
+      child: AnimatedScale(
+        scale: _isHovered[genre]! ? 0.95 : 1.0,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          width: 165,
+          height: 120,
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.85),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(40),
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(10),
-            ),
+            borderRadius: BorderRadius.circular(25),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.25),
@@ -361,23 +495,23 @@ class _GenreGrid extends StatelessWidget {
             ],
           ),
           child: InkWell(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(25),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => SongListPage(genre: genre)),
               );
             },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(style['icon'], size: 35, color: style['iconColor']),
-                  const SizedBox(width: 16),
+                  Icon(style['icon'], size: 30, color: style['iconColor']),
+                  const SizedBox(height: 6),
                   Text(
                     genre,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Montserrat',
                       color: style['textColor'],
@@ -389,13 +523,44 @@ class _GenreGrid extends StatelessWidget {
                         ),
                       ],
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildGenreBox(context, genres[0]),
+                _buildGenreBox(context, genres[1]),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildGenreBox(context, genres[2]),
+                _buildGenreBox(context, genres[3]),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [_buildGenreBox(context, genres[4])],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

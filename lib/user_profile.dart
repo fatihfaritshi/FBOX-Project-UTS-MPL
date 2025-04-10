@@ -28,7 +28,7 @@ class UserProfilePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Profile picture with white outline
+              // Profile picture
               Container(
                 padding: const EdgeInsets.all(3), // Ketebalan outline
                 decoration: BoxDecoration(
@@ -56,7 +56,7 @@ class UserProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
-              // 🎯 Followers & Following dalam box kecil
+              // Followers & Following
               Container(
                 padding: const EdgeInsets.symmetric(
                   vertical: 15,
@@ -92,6 +92,7 @@ class UserProfilePage extends StatelessWidget {
                         ),
                       ],
                     ),
+
                     // Garis pemisah
                     Container(
                       height: 30,
