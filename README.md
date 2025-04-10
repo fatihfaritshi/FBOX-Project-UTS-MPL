@@ -1,4 +1,4 @@
-# FBOX - Music Platform
+# FBOX -   A Music Platform
 
 A new Flutter project.
 
